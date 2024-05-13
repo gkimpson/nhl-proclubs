@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Lab404\Impersonate\Models\Impersonate;
 
 class User extends Authenticatable
 {
@@ -43,5 +44,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function canImpersonate(): bool
+    {
+        return true;
+//        return $this->is_admin == 1;
+    }
+
+    public function canBeImpersonated(): bool
+    {
+        return true;
+//        return $this->can_be_impersonated == 1;
     }
 }
